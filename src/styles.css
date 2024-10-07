@@ -1,1 +1,220 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --color-w : white;
+    --color-b : black;
+    --color-i-m : hsl(35, 100%, 50%);
+    --color-i-h : hsl(35, 98%, 45%);
+    --color-i-vh : hsl(35, 100%, 30%);
+    --color-r-vs : hsl(0, 85%, 82%);
+    --color-r-s : hsl(0, 100%, 70%);
+    --color-r-m : hsl(0, 100%, 50%);
+    --color-m-vs : hsl(240, 15%, 92%);
+    --color-m-vs : hsl(240, 31%, 90%);
+    --color-m-s : hsl(240, 39%, 85%);
+    --color-m-m : hsl(239, 25%, 65%);
+    --color-m-h : hsl(240, 12%, 43%);
+    --color-m-vh : hsl(240, 14%, 19.6%);
+}
+body {
+  margin : 0;
+ /* background-color: var(--color-m-s);*/
+}
+.invisible {
+    display : none;
+}
+.body {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.body {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.body-block {
+    display: block;
+}
+.section {
+    margin-top: .5rem;
+    min-width: 1000px;
+}
+.content {
+    padding : 1.5rem
+}
+.fit-content {
+    width: fit-content;
+}
+.full-content {
+    width: 100%;
+}
+.almost-full-content {
+    width : 75%;
+}
+.half-content {
+    width : 50%;
+}
+.flow-section {
+    display: flex;
+    flex-wrap: wrap;
+}
+.flex-center {
+    justify-content: center;
+}
+.flex-space-around {
+    justify-content: space-around;
+}
+.flex-space-between {
+    justify-content: space-between;
+}
+.flex-end {
+    justify-content: end;
+}
+.grid-section {
+    display: grid;
+}
+.grid-two-columns-auto {
+    grid-template-columns: auto auto;
+}
+.section__header > h1, .section__header > h2, .section__header > h3, .section__header > h4, .section__header > h5, .section__header > h6 {
+    color: var(--color-m-vh);
+}
+.background-1 {
+    background-color: var(--color-m-s);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+.background-2 {
+    background-color: var(--color-m-m);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+.background-3 {
+    background-color: var(--color-m-m);
+    border-radius: 5rem;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+.round-border {
+    border-radius: 1.5rem;
+}
+.btn {
+    padding: .75rem;
+    border: .15rem solid transparent;
+}
+.btn-1 {
+    background-color: var(--color-i-m);
+    color: white;
+}
+.btn-1:hover {
+    background-color: var(--color-i-h);
+}
+.btn-1:active {
+    background-color: var(--color-i-vh);
+}
+.btn-2 {
+    border-color: black;
+    background-color: hsl(0, 0%, 100%);
+    color: rgb(0, 0, 0);
+    transition: color 1s, background-color 1s;
+    box-sizing: border-box;
+}
+.btn-2:hover {
+    border-color: white;
+    background-color: black;
+    color: white;
+}
+.btn-2:active {
+    outline: .15rem solid var(--color-m-m);
+}
+.btn-3 {
+    border-color: var(--color-m-m);
+    background-color: var(--color-m-vs);
+    color: var(--color-m-vh);
+}
+.btn-3:hover {
+    background-color: var(--color-m-s);
+}
+.btn-3:active {
+    background-color: var(--color-m-m);
+    color: var(--color-m-vs);
+}
+.btn-4 {
+    border-color: transparent;
+    background-color: var(--color-m-vs);
+    color: var(--color-m-vs);
+    padding: 1rem;
+    border-radius: 5rem;
+}
+.btn + .btn {
+    margin-left: .25rem;
+}
+.flow-section > .form__el + .form__el {
+    margin-left: .25rem;
+}
+.form__el {
+    margin-top: .5rem;
+}
+.form__el > label {
+    color: var(--color-m-vh);
+}
+.i-form {
+    padding: .5rem;
+    background-color: white;
+    border: .1rem solid var(--color-m-vs);
+    border-radius: .75rem;
+    color: var(--color-m-h);
+    box-sizing: border-box;
+}
+.i-form:hover {
+    background-color: var(--color-m-vs);
+}
+.i-form:invalid {
+    background-color: var(--color-r-vs);
+    border-color: var(--color-r-s);
+}
+.i-form:invalid:focus {
+    background-color: var(--color-r-s);
+    border-color: var(--color-r-m);
+}
+.i-form:focus {
+    outline: .15rem solid var(--color-m-m);
+    color: var(--color-m-vh);
+}
+.i-form > option:hover, .i-form > option:focus {
+    background-color: var(--color-m-vs);
+}
+.error {
+    color: var(--color-m-vh);
+    background-color: var(--color-r-s);
+    border: .15rem solid transparent;
+    padding: .5rem;
+    display: block;
+    margin-top: .5rem;
+    border-radius: .5rem;
+    box-sizing: border-box;
+    width: 100%;
+}
+p {
+    color: var(--color-m-vh);
+}
+a.link {
+    color: var(--color-m-m);
+    text-decoration: none;
+}
+a.link:hover {
+    color: var(--color-m-s);
+    text-decoration: underline;
+}
+a.link:active {
+    color: var(--color-m-vs);
+    text-shadow: 
+        3px 3px var(--color-m-vh),
+        -3px 3px var(--color-m-vh),
+        -3px -3px var(--color-m-vh),
+        3px -3px var(--color-m-vh);
+}

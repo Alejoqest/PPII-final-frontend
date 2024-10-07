@@ -1,0 +1,15 @@
+@if (pelicula) {
+    <div>
+        <a [routerLink]="['../../editar', pelicula.id]">modificar</a>
+    </div>
+    <div>
+        <p>id : {{pelicula.id}}</p>
+        <p>{{pelicula.nombre}} {{pelicula.formato}}</p>
+        <p>{{pelicula.descripcion}}</p>
+        <p>unidades = {{pelicula.stock}} y precio unitario : {{pelicula.precio}}</p>
+    </div>
+} @else {
+    <div>
+        Espera
+    </div>
+}

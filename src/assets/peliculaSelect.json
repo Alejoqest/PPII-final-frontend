@@ -1,0 +1,20 @@
+[
+    {
+        "id" : 1,
+        "nombre" : "Godzilla vs Kong",
+        "formato" : "BLURAY",
+        "ano" : 2021,
+        "precio" : 20000.4,
+        "descripcion" : "Lagarto nuclear vs Mono gigante",
+        "stock" : 10
+    },
+    {
+        "id" : 2,
+        "nombre" : "Godzilla Minus one",
+        "formato" : "BLURAY",
+        "ano" : 2023,
+        "precio" : 20030.4,
+        "descripcion" : "Largato nuclear vs japones kamikaze",
+        "stock" : 15
+    }
+]

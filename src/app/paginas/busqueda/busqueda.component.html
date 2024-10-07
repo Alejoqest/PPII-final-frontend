@@ -1,0 +1,19 @@
+<!--@if (datos) {
+    @for (dato of datos; track dato.id) {
+        <div id="{{dato.id}}">
+            <p> id : {{dato.id}}</p>
+            <p> {{dato.nombre}} {{dato.formato}}</p>
+            <p> {{dato.precio}}</p>
+            <p> {{dato.ano}} </p>
+            <a [routerLink]="['/pelicula', dato.id]">Ir</a>
+        </div>
+    } @empty {
+        <p>No hay datos</p>
+    }
+} @else {
+    <div>
+        <p>
+            <strong>Cargando...</strong>
+        </p>
+    </div>
+}-->

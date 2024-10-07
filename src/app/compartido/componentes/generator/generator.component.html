@@ -1,0 +1,93 @@
+<form [formGroup]="form" (ngSubmit)="subirInfo()">
+    <label for="portada">Portada: </label>
+    <input type="file" formControlName="portada" id="portada" accept="image/*" (change)="cambiarImagen($event)">
+
+    <br>
+
+    @if (portada) {
+        <img [src]="portada" alt="portada">
+        <br>
+    }
+
+    <label for="nombre">Nombre: </label>
+    <input type="text" id="nombre" formControlName="nombre">
+    @if (nombre?.invalid && (nombre?.dirty || nombre?.touched)) {
+        <small>
+            Es obligatorio escribir el nombre de la pelicula
+        </small>
+    }
+
+    <br>
+
+    <label for="formato">Formato: </label>
+    <select id="formato" formControlName="formato">
+        <option value="" selected disabled>FORMATO</option>
+        @for (formato of formatos; track $index) {
+            <option [ngValue]="formato">{{formato}}</option>
+        }
+    </select>
+    @if (formato?.invalid && (formato?.dirty || formato?.touched)) {
+        <small>
+            Es obligatorio elegir un formato.
+        </small>
+    }
+    
+    <br>
+
+    <label for="año">Año:</label>
+    <input type="text" id="año" formControlName="ano">
+    @if (ano?.invalid && (ano?.dirty || ano?.touched)) {
+        <small>
+            @if (ano?.hasError('required')) {
+                Es obligatorio escribir el año de la pelicula.
+            }
+            @if (ano?.hasError('outboundsYear')) {
+                El año esta fuera del rango esperado.
+            }
+        </small>
+    }
+
+    <br>
+
+    <label for="descripcion">Descripcion:</label>
+    <textarea formControlName="descripcion" id="descripcion"></textarea>
+
+    <br>
+
+    <label for="precio">Precio:</label>
+    <input type="text" id="precio" formControlName="precio">
+    @if (precio?.invalid && (precio?.dirty || precio?.touched)) {
+        <small>
+            @if (precio?.hasError('required')) {
+                Es obligatorio que la pelicula tenga un precio.
+            }
+            @if (precio?.hasError('minValue') && !precio?.hasError('required')) {
+                Es precio es menor a 0;
+            }
+        </small>
+    }
+
+    <br>
+
+    <label for="stock">Stock:</label>
+    <input type="text" id="stock" formControlName="stock">
+    @if (stock?.invalid && (stock?.dirty || stock?.touched)) {
+        <div>
+           <small>
+                @if (stock?.hasError('required')) {
+                    Es obligatorio que la pelicula tenga stock.
+                }
+                @if (stock?.hasError('minValue')) {
+                    Es stock no puede ser negativo.
+                }
+            </small> 
+        </div>
+    }
+
+    <br>
+
+    <label for="categorias">Categorias</label>
+    <input type="text" id="categorias" formControlName="categorias">
+
+    <input [disabled]="form.invalid" type="submit" value="subir">
+</form>

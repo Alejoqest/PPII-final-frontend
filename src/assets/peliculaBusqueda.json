@@ -1,0 +1,23 @@
+[
+    {
+        "id" : 1,
+        "nombre" : "Godzilla vs Kong",
+        "formato" : "BLURAY",
+        "ano" : 2021,
+        "precio" : 20000.4
+    },
+    {
+        "id" : 2,
+        "nombre" : "Godzilla Minus one",
+        "formato" : "BLURAY",
+        "ano" : 2023,
+        "precio" : 20030.4
+    },
+    {
+        "id" : 3,
+        "nombre" : "Godzilla x Kong : Un nuevo imperio",
+        "formato" : "DVD",
+        "ano" : 2024,
+        "precio" : 20041.6
+    }
+]

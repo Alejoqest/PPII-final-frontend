@@ -24,7 +24,8 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              "src/assets/"
             ],
             "styles": [
               "src/styles.css"
@@ -64,7 +65,8 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "proyecto-final:build:production"
+              "buildTarget": "proyecto-final:build:production",
+              "proxyConfig": "src/proxy.conf.json"
             },
             "development": {
               "buildTarget": "proyecto-final:build:development"

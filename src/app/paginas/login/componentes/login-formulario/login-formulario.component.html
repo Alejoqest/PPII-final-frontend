@@ -1,0 +1,36 @@
+<form [formGroup]="form" (ngSubmit)="confirmarFormulario()" class="fit-content background-2" id="form">
+    <div class="section__header">
+        <h1>Iniciar Sesión</h1>
+    </div>
+    <div class="form__el">
+        <label for="email">Email: </label>
+        <input type="text" id="email" placeholder="Ingrese su email" formControlName="email" class="i-form full-content body-block">
+        @if (confirmarError('email')) {
+            <small class="error">
+                @if (email?.hasError('required')) {
+                    Necesita un email.
+                }
+                @if (!email?.hasError('required') && email?.hasError('email')) {
+                    Necesita un email escrito correctamente.
+                }
+            </small>
+        }
+    </div>
+    <div class="form__el">
+        <label for="contrasena">Contraseña: </label>
+        <input type="password" id="contrasena" placeholder="Ingrese su contraseña" formControlName="contrasena" class="i-form full-content body-block">
+        @if (confirmarError('contrasena')) {
+            <small class="error">
+                @if (contrasena?.hasError('required')) {
+                    Debe ingresar una contraseña.
+                }
+                @if (contrasena?.hasError('minlength')) {
+                    La contraseña debe ser igual o más de 8 caracteres.
+                }
+            </small>
+        }
+    </div>
+    <div class="form__el flow-section flex-center">
+        <input [disabled]="form.invalid" type="submit" value="Iniciar Sesion" class="btn btn-1 round-border full-content">
+    </div>
+</form>

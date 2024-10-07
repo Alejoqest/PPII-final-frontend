@@ -1,0 +1,52 @@
+<form [formGroup]="searchForm" (ngSubmit)="enviarParametros()" class="full-content background-2">
+    <div class="section__header">
+        <h3>Busqueda</h3>
+    </div>
+    <div class="form__el full-content">
+        <input type="text" formControlName="nombre" class="i-form full-content" placeholder="Buscar...">
+    </div>
+    <div class="full-content flow-section flex-space-around">
+        <div class="form__el">
+            <label for="">Formato: </label>
+            <select name="" id="" formControlName="formato" (change)="cambiarFormato()" class="i-form">
+                <option value="TODOS" selected>TODOS</option>
+                @for (formato of formatos; track $index) {
+                    <option [ngValue]="formato">{{formato}}</option>
+                }
+            </select>
+        </div>
+        <div class="form__el">
+            <label for="">Stock Disponible: </label>
+            <select name="" id="" formControlName="sinStock" class="i-form">
+                <option value="false" selected>Disponible</option>
+                <option value="true">Todos</option>
+            </select>
+        </div>
+        <div class="form__el">
+            <label for="">Genero: </label>
+            <select name="" id="" formControlName="categoria" (change)="cambiarCategoria()" class="i-form">
+                <option value="0" selected>Ninguno</option>
+                @for (c of categorias; track $index) {
+                    <option [ngValue]="c.id">{{c.nombre}}</option>
+                }
+            </select>
+        </div>
+        <div class="form__el">
+            <label for="">Orden Precio: </label>
+            <select name="" id="" formControlName="ordenPrecio" class="i-form">
+                <option value="false" selected>Más caro</option>
+                <option value="true">Barato</option>
+            </select>
+        </div>
+        <div class="form__el">
+            <label for="">Orden Tiempo: </label>
+            <select name="" id="" formControlName="ordenTiempo" class="i-form">
+                <option value="false" select>Más nuevo</option>
+                <option value="true">Más viejo</option>
+            </select>
+        </div>
+    </div>
+    <div class="form__el flow-section flex-center">
+        <input type="submit" value="Buscar" class="btn btn-1 round-border full-content">
+    </div>
+</form>

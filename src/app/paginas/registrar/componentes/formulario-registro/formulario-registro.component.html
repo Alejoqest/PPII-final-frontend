@@ -1,0 +1,85 @@
+<form [formGroup]="form" (ngSubmit)="confimarEnvio()" class="fit-content background-2" id="form">
+    <div class="section__header">
+        <h1>Registrarse</h1>
+    </div>
+    <div class="full-content flow-section flex-space-between">
+        <div class="form__el half-content">
+            <label for="nombre">Nombre: </label>
+            <input type="text" id="nombre" formControlName="nombre" class="i-form body-block" placeholder="Nombre">
+            @if (confirmarError('nombre')) {
+                <small class="error">
+                    Debe ingresar un nombre.
+                </small>
+            }
+        </div>
+        <div class="form__el half-content">
+            <label for="apellido">Apellido: </label>
+            <input type="text" id="apellido" formControlName="apellido" class="i-form body-block" placeholder="Apellido">
+            @if (confirmarError('apellido')) {
+                <small class="error">
+                    Debe ingresar un apellido.
+                </small>
+            }
+        </div>
+    </div>
+    <div class="form__el full-content">
+        <label for="apodo">Apodo: </label>
+        <input type="text" id="apodo" formControlName="apodo" class="i-form full-content body-block" [placeholder]="(apellido?.value && nombre?.value)? nombre?.value + ' ' + apellido?.value : 'Apodo'">
+    </div>
+    <div class="form__el full-content">
+        <label for="email">Email: </label>
+        <input type="text" id="email" formControlName="email" class="i-form full-content body-block" placeholder="Email">
+        @if (confirmarError('email')) {
+            <small class="error">
+                @if (email?.hasError('required')) {
+                    Debe ingresar un email.
+                }
+                @if (email?.hasError('email')) {
+                    Lo ingresado no es un email.
+                }
+            </small>
+        }
+    </div>
+    <div class="form__el full-content">
+        <label for="telefono">Telefono: </label>
+        <input type="text" id="telefono" formControlName="telefono" class="i-form full-content body-block" placeholder="Telefono">
+        @if (confirmarError('telefono')) {
+            <small class="error">
+                Debe ingresar un numero de telefono.
+            </small>
+        }
+    </div>
+    <div class="full-content flow-section flex-space-between">
+        <div class="form__el half-content">
+            <label for="contrasena">Contraseña: </label>
+            <input type="password" id="contrasena" formControlName="contrasena" class="i-form body-block" placeholder="Contraseña">
+            @if (confirmarError('contrasena')) {
+                <small class="error">
+                    @if (contrasena?.hasError('required')) {
+                        Debe ingresar una contraseña.
+                    }
+                    @if (contrasena?.hasError('minlength')) {
+                        La contraseña debe ser más de 8 caracteres.
+                    }
+                </small>
+            }
+        </div>
+        <div class="form__el half-content">
+            <label for="reContrasena">Repetir contraseña: </label>
+            <input type="password" id="reContrasena" formControlName="repetirContrasena" class="i-form body-block" placeholder="Repetir Contraseña">
+            @if (confirmarError('repetirContrasena')) {
+                <small class="error">
+                    @if (reContrasena?.hasError('required')) {
+                        Debe ingresar una contraseña.
+                    }
+                    @if (reContrasena?.hasError('minlength')) {
+                        La contraseña debe ser más de 8 caracteres.
+                    }
+                </small>
+            }
+        </div>
+    </div>
+    <div class="form__el flow-section flex-center">
+        <input [disabled]="form.invalid" type="submit" value="Registrarse" class="btn btn-1 round-border full-content">
+    </div>
+</form>
