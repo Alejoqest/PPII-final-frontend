@@ -7,7 +7,7 @@ import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validator
   imports: [ReactiveFormsModule],
   templateUrl: './login-formulario.component.html',
   styles: `#form {
-    max-width: 251.55px;
+    /*max-width: 251.55px;*/
   }`,
   //styleUrl: './login-formulario.component.css'
 })

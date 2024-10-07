@@ -10,7 +10,10 @@ import { Usuario } from '../../../../core/modelos/usuario.model';
   //templateUrl: './foto-perfil.component.html',
   template: `<div class="fit-content">
     <imagen [src]="'usuario/' + data.nombreArchivo"/>
-    <input type="file" (change)="cambiarImagen($event)" class="body-block">
+    <div class="body-block">
+      <input type="file" id="foto" (change)="cambiarImagen($event)" accept="image/*">
+      <label id="foto-label" for="foto" class="btn btn-1 round-border">Cambiar Foto</label>
+    </div>
   </div>`,
   styleUrl: './foto-perfil.component.css'
 })

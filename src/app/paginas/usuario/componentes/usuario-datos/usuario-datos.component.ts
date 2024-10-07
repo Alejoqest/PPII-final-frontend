@@ -1,17 +1,27 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Usuario } from '../../../../core/modelos/usuario.model';
+import { GeneralService } from '../../../../compartido/servicios/general/general.service';
+import { DialogComponent } from '../../../../compartido/componentes/dialog/dialog.component';
+
+const DATA = {
+  encabezado : '¿Desea realizar el cambio?',
+  cuerpo : 'Esta accion no se va a poder desahacer. Todos los datos anteriores va a ser sobreescribidos.',
+}
 
 @Component({
   selector: 'usuario-datos',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, DialogComponent],
   //templateUrl: './usuario-datos.component.html',
   template: `<div>
+    @if (general.visible) {
+      <app-dialog [encabezado]="data.encabezado" [texto]="data.cuerpo" (eventoConfirmacion)="enviarEdicion()"/>
+    }
     <div class="section__header">
       <h1>Informacion de usuario:</h1>
     </div>
-    <form [formGroup]="campos" (ngSubmit)="enviarEdicion()">
+    <form [formGroup]="campos" (ngSubmit)="mostrar()">
       <div class="full-content flow-section flex-space-between">
         <div class="form__el">
           <label for="nombre">Nombre: </label>
@@ -54,13 +64,18 @@ export class UsuarioDatosComponent implements OnInit {
     telefono : ['', [Validators.required]]
   });
 
-  constructor(private builder : FormBuilder) {}
+  constructor(private builder : FormBuilder, public general : GeneralService) {}
 
   ngOnInit(): void {
     this.reiniciarInfo();
   }
 
-  public enviarEdicion() {
+  public mostrar() : void {
+    this.general.visible = true;
+  }
+
+  public enviarEdicion() : void {
+    this.general.visible = false;
     const datos : Usuario.UsuarioDatos = {
       id : this.usuario.id,
       nombre : this.nombre?.value,
@@ -74,7 +89,7 @@ export class UsuarioDatosComponent implements OnInit {
     this.usuarioActualizar.emit(datos);
   }
 
-  public reiniciarInfo() {
+  public reiniciarInfo() : void {
     this.campos.patchValue({
       nombre : this.usuario.nombre,
       apellido : this.usuario.apellido,
@@ -104,4 +119,7 @@ export class UsuarioDatosComponent implements OnInit {
     return this.campos.get('telefono');
   }
   
+  get data() : any {
+    return DATA;
+  }
 }

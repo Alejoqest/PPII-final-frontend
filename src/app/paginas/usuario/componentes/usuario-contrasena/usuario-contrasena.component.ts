@@ -17,16 +17,16 @@ import { Usuario } from '../../../../core/modelos/usuario.model';
       <div class="full-content flow-section flex-space-bewteen">
         <div class="form__el">
           <label for="viejaContrasena">Ingrese la vieja contraseña: </label>
-          <input type="text" id="viejaContrasena" formControlName="viejaContrasena" class="i-form body-block">
+          <input type="password" id="viejaContrasena" formControlName="viejaContrasena" class="i-form body-block">
         </div>
         <div class="form__el">
           <label for="viejaContrasenaRep">Repita la vieja contraseña: </label>
-          <input type="text" id="viejaContrasenaRep" formControlName="viejaContrasenaRep" class="i-form body-block">
+          <input type="password" id="viejaContrasenaRep" formControlName="viejaContrasenaRep" class="i-form body-block">
         </div>
       </div>
       <div class="form__el">
         <label for="nuevaContrasena">La nueva contraseña: </label>
-        <input type="text" id="nuevaContrasena" formControlName="nuevaContrasena" class="i-form body-block full-content">
+        <input type="password" id="nuevaContrasena" formControlName="nuevaContrasena" class="i-form body-block full-content">
       </div>
       <div class="form__el">
         <input type="submit" value="Cambiar Contraseña" class="btn btn-1" [disabled]="campos.invalid">

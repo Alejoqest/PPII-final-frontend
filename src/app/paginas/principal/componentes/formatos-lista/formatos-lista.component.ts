@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
         <div>
           <a [routerLink]="['/explorar']" [queryParams]="{formato : f}" queryParamsHandling="merge"
             class="btn btn-4">
-            {{f}}
+              {{(f != 'UHD')? f : ('4K ' + f)}}
           </a>
         </div>
       }

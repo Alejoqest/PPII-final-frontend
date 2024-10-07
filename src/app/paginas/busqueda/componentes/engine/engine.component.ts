@@ -36,7 +36,7 @@ export class EngineComponent implements OnInit {
 
   public categorias ?: Categoria[];
 
-  public formatos : string[] = ['DVD', 'BLURAY'];
+  public formatos : string[] = ['DVD', 'BLURAY', 'UHD'];
 
   private data?: Http.SearchQueries;
 

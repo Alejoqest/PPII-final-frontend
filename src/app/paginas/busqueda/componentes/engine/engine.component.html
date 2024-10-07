@@ -1,30 +1,30 @@
 <form [formGroup]="searchForm" (ngSubmit)="enviarParametros()" class="full-content background-2">
     <div class="section__header">
-        <h3>Busqueda</h3>
+        <h1>Busqueda</h1>
     </div>
     <div class="form__el full-content">
         <input type="text" formControlName="nombre" class="i-form full-content" placeholder="Buscar...">
     </div>
     <div class="full-content flow-section flex-space-around">
         <div class="form__el">
-            <label for="">Formato: </label>
-            <select name="" id="" formControlName="formato" (change)="cambiarFormato()" class="i-form">
+            <label for="formato">Formato: </label>
+            <select name="formato" id="formato" formControlName="formato" (change)="cambiarFormato()" class="i-form body-block">
                 <option value="TODOS" selected>TODOS</option>
-                @for (formato of formatos; track $index) {
-                    <option [ngValue]="formato">{{formato}}</option>
+                @for (f of formatos; track $index) {
+                    <option [ngValue]="f">{{(f != 'UHD')? f : ('4K ' + f)}}</option>
                 }
             </select>
         </div>
         <div class="form__el">
-            <label for="">Stock Disponible: </label>
-            <select name="" id="" formControlName="sinStock" class="i-form">
+            <label for="stock">Stock Disponible: </label>
+            <select name="stock" id="stock" formControlName="sinStock" class="i-form body-block">
                 <option value="false" selected>Disponible</option>
                 <option value="true">Todos</option>
             </select>
         </div>
         <div class="form__el">
-            <label for="">Genero: </label>
-            <select name="" id="" formControlName="categoria" (change)="cambiarCategoria()" class="i-form">
+            <label for="genero">Genero: </label>
+            <select name="genero" id="genero" formControlName="categoria" (change)="cambiarCategoria()" class="i-form body-block">
                 <option value="0" selected>Ninguno</option>
                 @for (c of categorias; track $index) {
                     <option [ngValue]="c.id">{{c.nombre}}</option>
@@ -32,15 +32,15 @@
             </select>
         </div>
         <div class="form__el">
-            <label for="">Orden Precio: </label>
-            <select name="" id="" formControlName="ordenPrecio" class="i-form">
+            <label for="precio-orden">Orden Precio: </label>
+            <select name="precio-orden" id="precio-orden" formControlName="ordenPrecio" class="i-form body-block">
                 <option value="false" selected>Más caro</option>
                 <option value="true">Barato</option>
             </select>
         </div>
         <div class="form__el">
-            <label for="">Orden Tiempo: </label>
-            <select name="" id="" formControlName="ordenTiempo" class="i-form">
+            <label for="tiempo-orden">Orden Tiempo: </label>
+            <select name="tiempo-orden" id="tiempo-orden" formControlName="ordenTiempo" class="i-form body-block">
                 <option value="false" select>Más nuevo</option>
                 <option value="true">Más viejo</option>
             </select>

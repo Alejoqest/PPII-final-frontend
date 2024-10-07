@@ -22,7 +22,14 @@ export class PeliculaCantidadComponent {
   public paginas : number = this.cantidad / 16;
 
   public obtenerLista() : number[] {
-    const paginas : number[] = (this.cantidad >= 1)? Array.from({length: this.cantidad}, (_, i) => i + 1) : [1] ;
+    let cantidadPag = 1;
+
+    while (cantidadPag * 16 < this.cantidad) {
+      cantidadPag++;
+    }
+
+    const paginas : number[] = (cantidadPag >= 1)? Array.from({length: cantidadPag}, (_, i) => i + 1) : [1] ;
+
     return paginas;
   }
 

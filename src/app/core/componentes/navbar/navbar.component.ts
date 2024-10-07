@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
   <nav class="navbar">
     <div class="navbar__bar">
       <div class="navbar__el">
-        <a [routerLink]="['/']" routerLinkActive="active" class="navlink">
+        <a [routerLink]="['/home']" routerLinkActive="active" class="navlink">
           <h2>Pelibrary</h2>
         </a>
       </div>

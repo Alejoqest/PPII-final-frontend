@@ -31,7 +31,7 @@ export class PeliculaService {
   public getPeliculaCantidad(data : Http.SearchQueries) {
     const params = this.crearParam(data);
 
-    return this.http.get<{cantidad : number}>(this.url + '/mostrar/cantidad', {params : params})
+    return this.http.get<{cantidad : number}>(this.url + '/mostrar/cantidad/', {params : params})
   }
 
   public getPeliculaUltimas() {
