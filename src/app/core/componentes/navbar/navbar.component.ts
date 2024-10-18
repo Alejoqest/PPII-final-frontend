@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
   imports: [RouterModule, navsearchComponent, CommonModule],
   //templateUrl: './navbar.component.html',
   template : `
-  <nav class="navbar">
+  <nav class="navbar" id="top">
     <div class="navbar__bar">
       <div class="navbar__el">
         <a [routerLink]="['/home']" routerLinkActive="active" class="navlink">
@@ -28,7 +28,7 @@ import { CommonModule } from '@angular/common';
         <a [routerLink]="['/explorar']" routerLinkActive="active" class="navlink">Explorar</a>
       </div>
       <div class="navbar__el">
-        <button (click)="cambiarMenu()" class="navlink" id="menu-btn">Menu</button>
+        <button (click)="cambiarMenu()" class="navlink bx" id="menu-btn" [ngClass]="{'active' : menuExtendido}"><i class='bx' [ngClass]="{'bx-menu' : !menuExtendido, 'bx-x' : menuExtendido}"></i></button>
       </div>
     </div>
     <div [ngClass]="{'navbar__menu' : true, 'invisible' : !menuExtendido}">

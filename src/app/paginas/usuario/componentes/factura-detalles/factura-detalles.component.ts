@@ -9,9 +9,9 @@ import { RouterLink } from '@angular/router';
   //templateUrl: './factura-detalles.component.html',
   template: `<div class="full-content">
     @for (detalle of detalles; track detalle.id) {
-      <div class="full-content background background-1 flow-section flex-space-around">
+      <div class="full-content background background-5 flow-section flex-space-around align-center">
         <div>
-          <a [routerLink]="['/pelicula', detalle.peliculaId]">{{detalle.peliculaNombre}} {{detalle.peliculaFormato}}</a>
+          <a [routerLink]="['/pelicula', detalle.peliculaId]" class="link">{{detalle.peliculaNombre}} {{detalle.peliculaFormato}}</a>
         </div>
         <div>
           <p>Unidades: {{detalle.unidades}}</p>

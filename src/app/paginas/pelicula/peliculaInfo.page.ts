@@ -9,12 +9,14 @@ import { CarroFactura } from '../../core/modelos/carrofactura.model';
 import { CarroFacturaService } from '../../core/servicios/carrofactura/carrofactura.service';
 import { PeliculaOpcionesComponent } from './componentes/pelicula-opciones/pelicula-opciones.component';
 import { ImagenComponent } from '../../compartido/componentes/imagen/imagen.component';
+import { MensajeComponent } from '../../core/componentes/mensaje/mensaje.component';
 
 @Component({
   selector: 'pelicula-info',
   standalone: true,
   imports: [
     RouterModule, 
+    MensajeComponent,
     ImagenComponent,
     PeliculaCuerpoComponent, 
     PeliculaDescripcionComponent, 
@@ -22,15 +24,13 @@ import { ImagenComponent } from '../../compartido/componentes/imagen/imagen.comp
   ],
   //templateUrl: './pelicula.component.html',
   template : `<div class="section">
-    @if (mensaje != '') {
-      <h3>{{mensaje}}</h3>
-    }
+    <app-mensaje [mensaje]="mensaje" [hayError]="error"/>
     @if (pelicula) {
       <div class="full-content grid-section grid-two-columns-auto">
         <imagen [src]="portada" [width]="22"/>
-        <div>
+        <div class="almost-full-content">
           <pelicula-content [datos]="pelicula">
-            <pelicula-opciones [info]="pelicula" (facturaSubir)="subirFactura($event)" (elementoSubir)="subirElemento($event)"/>
+            <pelicula-opciones [info]="pelicula" [accion]="accion" (facturaSubir)="subirFactura($event)" (elementoSubir)="subirElemento($event)"/>
           </pelicula-content>
           <pelicula-descripcion [pelicula]="pelicula"/>
         </div>
@@ -46,8 +46,10 @@ import { ImagenComponent } from '../../compartido/componentes/imagen/imagen.comp
 })
 export class PeliculaInfoPage implements OnInit {
   public pelicula ?: Pelicula.PeliculaDatos;
-  public portada : string = 'pelicula/NOT_FOUND.jpg';
+  public portada : string = 'pelicula/NOTFOUND.jpg';
   public mensaje : string = '';
+  public accion : boolean = false;
+  public error : boolean = false;
 
   constructor(private ruta : ActivatedRoute, private carroService : CarroFacturaService,
     private service : PeliculaService) {}
@@ -63,7 +65,7 @@ export class PeliculaInfoPage implements OnInit {
   private obtenerPelicula(id : number) : void {
     this.service.getPeliculasDatos(id).subscribe({
       next : (data : Pelicula.PeliculaDatos) => this.pelicula = data,
-      error : (error : Http.Response) => this.mensaje = error.mensaje
+      error : (err) => this.mensaje = err.error.mensaje
     });
       /*(data : Pelicula.PeliculaDatos) => {
       let resultado : Pelicula.PeliculaDatos[] = data.filter((dato) => {
@@ -84,20 +86,38 @@ export class PeliculaInfoPage implements OnInit {
   }
 
   public subirFactura(factura : CarroFactura.FacturaIntento) : void {
+    this.accion = true;
     this.carroService.postFactura(factura).subscribe({
       next : () => {
         this.mensaje = 'Se hizo la compra perfectamente.';
+        this.gestionarRespuesta();
         if (this.pelicula?.stock) this.pelicula.stock = this.pelicula.stock  - factura.detalles[0].unidades;
-      }
+      },
+      error : (err) => this.gestionarError(err)
     });
   }
   
   public subirElemento(elemento : CarroFactura.CarroElemento) : void {
+    this.accion = true;
     this.carroService.putCarroElemento(elemento).subscribe({
       next : () => {
-        this.mensaje = 'perfecto'
-      }
+        this.mensaje = 'Se añadio al carro.';
+        this.gestionarRespuesta();
+      },
+      error : (err) => this.gestionarError(err)
     });
+  }
+
+  private gestionarRespuesta() : void {
+    this.error = false;
+    this.accion = false;
+  }
+
+  private gestionarError(err : any) : void {
+    const errores = err.error;
+    this.mensaje = errores.mensaje;
+    this.error = true;
+    this.accion = false;
   }
 
 }

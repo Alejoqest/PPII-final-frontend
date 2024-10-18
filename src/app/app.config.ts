@@ -5,12 +5,13 @@ import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { httpRequestInterceptor } from './core/interceptor/http-request/http-request.interceptor';
+import { httpTokenOutdatedInterceptor } from './core/interceptor/http-token-outdated/http-token-outdated.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes), 
     provideClientHydration(),
-    provideHttpClient(withInterceptors([httpRequestInterceptor]))
+    provideHttpClient(withInterceptors([httpRequestInterceptor, httpTokenOutdatedInterceptor]))
   ]
 };

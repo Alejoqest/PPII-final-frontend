@@ -16,7 +16,7 @@ export namespace CarroFactura {
 
     export interface Factura {
         id : number;
-        cantidadDeElementos : number;
+        cantidadDeDetalles : number;
         fechaFactura : string;
         precioTotal : number;
     }

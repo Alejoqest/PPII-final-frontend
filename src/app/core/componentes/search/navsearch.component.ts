@@ -10,7 +10,8 @@ import { Http } from '../../modelos/http.model';
   template : `
   <form [formGroup]="form" (ngSubmit)="enviarQuery()" id="search-form">
     <input type="text" placeholder="Buscar" formControlName="busqueda">
-    <input type="submit" value="Buscar">
+    <label for="subir"><i class="bx bx-search"></i></label>
+    <input type="submit" id="subir" value="Buscar">
   </form>`,
   styles : `
   #search-form {
@@ -25,16 +26,19 @@ import { Http } from '../../modelos/http.model';
     input[type=text]:focus {
         outline: none;
     }
+    input[type=submit] {
+      display: none;
+    }
   }`
   //styleUrl: './search.component.css'
 })
 export class navsearchComponent {
+  @Output() emitirDatos : EventEmitter<Http.SearchQueries> = new EventEmitter<Http.SearchQueries>();
 
   public form : FormGroup = this.builder.group({
     busqueda : ['']
   });
 
-  @Output() emitirDatos : EventEmitter<Http.SearchQueries> = new EventEmitter<Http.SearchQueries>();
 
   constructor (private builder : FormBuilder) {}
 

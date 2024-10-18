@@ -9,6 +9,7 @@
     --color-r-vs : hsl(0, 85%, 82%);
     --color-r-s : hsl(0, 100%, 70%);
     --color-r-m : hsl(0, 100%, 50%);
+    --color-g-m : hsl(193, 91%, 69%);
     --color-m-vs : hsl(240, 15%, 92%);
     --color-m-vs : hsl(240, 31%, 90%);
     --color-m-s : hsl(240, 39%, 85%);
@@ -31,12 +32,8 @@ body {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-}
-.body {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    padding-bottom: 1.5rem;
+    border-bottom: 1.5rem solid var(--color-m-vh);
 }
 .body-block {
     display: block;
@@ -47,6 +44,19 @@ body {
 }
 .content {
     padding : 1.5rem
+}
+.message {
+    width: 100%;
+    height: fit-content;
+    margin: 1rem 0rem;
+    border-radius: .5rem;
+    border: .15rem solid transparent;
+    padding: .5rem;
+    text-align: center;
+}
+.no-error {
+    background-color: var(--color-g-m);
+    color: var(--color-m-vh);
 }
 .fit-content {
     width: fit-content;
@@ -73,6 +83,9 @@ body {
 .flex-space-between {
     justify-content: space-between;
 }
+.align-center {
+    align-items: center;
+}
 .flex-end {
     justify-content: end;
 }
@@ -88,7 +101,7 @@ body {
 .background-1 {
     background-color: var(--color-m-s);
     border-radius: 1rem;
-    padding: 2rem;
+    padding: 1rem;
     box-sizing: border-box;
 }
 .background-2 {
@@ -103,6 +116,21 @@ body {
     padding: 2rem;
     box-sizing: border-box;
 }
+.background-4 {
+    background-color: var(--color-m-s);
+    border: .25rem solid var(--color-m-vh);
+    padding: .5rem;
+    box-sizing: border-box;
+}
+.background-5 {
+    background-color: var(--color-m-m);
+    border: .25rem solid var(--color-m-vh);
+    padding: .5rem;
+    box-sizing: border-box;
+}
+.top-margin-m {
+    margin-top: .5rem;
+}
 .round-border {
     border-radius: 1.5rem;
 }
@@ -110,6 +138,7 @@ body {
     padding: .75rem;
     border: .15rem solid transparent;
     font-weight: bold;
+    text-decoration: none;
 }
 .btn-1 {
     background-color: var(--color-i-m);
@@ -215,7 +244,7 @@ p {
     color: var(--color-m-vh);
 }
 a.link {
-    color: var(--color-m-m);
+    color: var(--color-m-h);
     text-decoration: none;
 }
 a.link:hover {

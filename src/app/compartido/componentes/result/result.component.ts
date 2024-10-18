@@ -13,7 +13,7 @@ import { ImagenComponent } from '../imagen/imagen.component';
   <div class="search__result">
     <a [routerLink]="['/pelicula', datos.id]">
       <div class="result__img">
-        <imagen [src]="url" [width]="15"/>
+        <imagen [src]="url" [width]="15" [height]="18"/>
       </div>
     </a>
     <div class="result__content">

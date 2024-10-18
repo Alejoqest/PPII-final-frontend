@@ -5,18 +5,15 @@ import { StorageService } from '../../core/servicios/storage/storage.service';
 import { Router, RouterModule } from '@angular/router';
 import { Http } from '../../core/modelos/http.model';
 import { BusEventoService } from '../../core/servicios/busEvento/bus-evento.service';
+import { MensajeComponent } from '../../core/componentes/mensaje/mensaje.component';
 
 @Component({
   selector: 'app-iniciar',
   standalone: true,
-  imports: [LoginFormularioComponent, RouterModule],
+  imports: [LoginFormularioComponent, MensajeComponent, RouterModule],
   //templateUrl: './login.page.html',
   template: `<div class="section">
-    @if(mensaje != '') {
-      <div class="section__header">
-        <h2>ERROR = {{mensaje}}</h2>
-      </div>
-    }
+    <app-mensaje [mensaje]="mensaje" [hayError]="error"/>
     <div class="full-content flow-section flex-center">
       <login-formulario (enviarInfo)="iniciarSesion($event)"/>
     </div>
@@ -24,8 +21,9 @@ import { BusEventoService } from '../../core/servicios/busEvento/bus-evento.serv
   styleUrl: './login.page.css'
 })
 export class LoginPage {
-
   public mensaje : string = '';
+  public error : boolean = false;
+  public enviando = false;
 
   constructor (private authSer : AuthService, private storageSer : StorageService, 
     private bus : BusEventoService, private router : Router) {}
@@ -37,7 +35,11 @@ export class LoginPage {
         this.bus.publicar({name : 'sesion', data : ''})
         this.router.navigate(['/cuenta']);
       },
-      error : (err : Http.Response) => this.mensaje = err.mensaje
+      error : (err) => {
+        const errores = err.error;
+        this.mensaje = errores.mensaje;
+        this.error = true;
+      }
     });
   }
 }

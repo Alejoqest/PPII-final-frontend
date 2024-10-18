@@ -9,8 +9,8 @@ import { Usuario } from '../../../../core/modelos/usuario.model';
   imports: [ReactiveFormsModule, ImagenComponent],
   //templateUrl: './foto-perfil.component.html',
   template: `<div class="fit-content">
-    <imagen [src]="'usuario/' + data.nombreArchivo"/>
-    <div class="body-block">
+    <imagen [src]="'usuario/' + data.nombreArchivo" [height]="15" [width]="15"/>
+    <div id="photo-body" class="body-block">
       <input type="file" id="foto" (change)="cambiarImagen($event)" accept="image/*">
       <label id="foto-label" for="foto" class="btn btn-1 round-border">Cambiar Foto</label>
     </div>

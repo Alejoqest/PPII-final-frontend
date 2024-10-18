@@ -9,9 +9,9 @@ import { RouterLink } from '@angular/router';
   //templateUrl: './detalles.component.html',
   template: `<div class="full-content">
     @for (e of elementos; track e.id) {
-      <div class="backrgound background-1 full-content flow-section flex-space-between">
+      <div class="backrgound background-5 full-content flow-section flex-space-between align-center">
         <div>
-          <a [routerLink]="['/pelicula', e.peliculaId]">{{e.peliculaNombre}} [{{e.peliculaFormato}}]</a>
+          <a [routerLink]="['/pelicula', e.peliculaId]" class="link">{{e.peliculaNombre}} [{{e.peliculaFormato}}]</a>
         </div>
         <div>
           <p>Unidades : {{e.unidades}}</p> 
@@ -25,7 +25,7 @@ import { RouterLink } from '@angular/router';
         </div>
       </div>
     } @empty {
-      <div class="background background-1 full-content">
+      <div class="full-content">
         <div class="section__header">
           <h2>No hay elementos en el carro</h2>
         </div>
@@ -36,7 +36,6 @@ import { RouterLink } from '@angular/router';
 })
 export class ElementosComponent {
   @Input({required : true}) public elementos !: CarroFactura.CarroElemento[];
-
   @Output() public carroModificar : EventEmitter<CarroFactura.CarroElemento> = new EventEmitter<CarroFactura.CarroElemento>();
 
   public modificarElemento(elemento : CarroFactura.CarroElemento, operacion : '+' | '-') {

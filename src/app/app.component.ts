@@ -3,13 +3,15 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Usuario } from './core/modelos/usuario.model';
 import { guestLinks} from './core/recursos/routerLink';
 import { NavbarComponent } from './core/componentes/navbar/navbar.component';
+import { FooterComponent } from './core/componentes/footer/footer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     RouterOutlet, 
-    NavbarComponent 
+    NavbarComponent,
+    FooterComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

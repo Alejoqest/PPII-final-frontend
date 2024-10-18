@@ -33,8 +33,9 @@ import { Http } from '../../../core/modelos/http.model';
   .search__wrapper {
     width: 100%;
     display: grid;
-    grid-template-columns: auto auto auto;
-    grid-column-gap: 1rem;
+    grid-template-columns: auto auto auto auto;
+    grid-column-gap: .25rem;
+    grid-row-gap: .25rem;
   }
   .search__process {
     text-align: center;
@@ -45,7 +46,7 @@ import { Http } from '../../../core/modelos/http.model';
   `
   //styleUrl: './wrapper.component.css'
 })
-export class WrapperComponent implements OnInit{
+export class WrapperComponent implements OnInit {
   @Input({required : true}) public resultados !: Pelicula.PeliculaBusqueda[];
   @Input({required : true}) public busqueda !: boolean;
   

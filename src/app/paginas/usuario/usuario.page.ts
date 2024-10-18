@@ -10,12 +10,14 @@ import { Http } from '../../core/modelos/http.model';
 import { FotoPerfilComponent } from './componentes/foto-perfil/foto-perfil.component';
 import { UsuarioEliminarComponent } from './componentes/usuario-eliminar/usuario-eliminar.component';
 import { Router, RouterOutlet } from '@angular/router';
+import { MensajeComponent } from '../../core/componentes/mensaje/mensaje.component';
 
 @Component({
   selector: 'app-usuario',
   standalone: true,
   imports: [
     RouterOutlet,
+    MensajeComponent,
     FotoPerfilComponent, 
     UsuarioDatosComponent, 
     UsuarioContrasenaComponent, 
@@ -25,11 +27,7 @@ import { Router, RouterOutlet } from '@angular/router';
   ],
   //templateUrl: './usuario.page.html',
   template: `
-    @if (mensaje !== '') {
-      <div>
-        <h2>{{mensaje}}</h2>
-      </div>
-    }
+  <app-mensaje [mensaje]="mensaje" [hayError]="error"/>
     @if (!haySesion) {
       <div class="section flow-content flex-center">
         <div class="section__header">
@@ -70,6 +68,7 @@ export class UsuarioPage implements OnInit {
   };
   public haySesion : boolean = true;
   public mensaje : string = '';
+  public error : boolean = false;
 
   constructor(private service : AuthService, private sesion : StorageService, private router : Router) {}
 
@@ -84,7 +83,7 @@ export class UsuarioPage implements OnInit {
   public obtenerUsuario() {
     this.service.getInfoDetalles().subscribe({
       next : (value : Usuario.UsuarioDatos) => this.usuario = value,
-      error : (err : Http.Response) => this.mensaje = err.mensaje
+      error : (err) => this.mensaje = err.error.mensaje
     });
   }
 
@@ -97,32 +96,35 @@ export class UsuarioPage implements OnInit {
   public actualizarUsuario(datos : Usuario.UsuarioDatos) {
     this.service.putUsuario(datos).subscribe({
       next : (jwt) => {
-        this.mensaje = 'Se actualizo los datos de usuario correctamente.';
         this.sesion.saveToken(jwt.token);
         this.obtenerUsuario();
+        this.error = false;
+        this.mensaje = 'Se actualizo los datos de usuario correctamente.';
       },
-      error : (err : Http.Response) => this.mensaje = err.mensaje
+      error : (err) => this.gestionarError(err)
     });
   }
 
   public actualizarContrasena(datos : Usuario.UsuarioContrasena) {
     this.service.putContrasena(datos).subscribe({
       next : (jwt) => {
-        this.mensaje = 'Se cambio la contraseña correctamente.';
         this.sesion.saveToken(jwt.token);
         this.obtenerUsuario();
+        this.error = false;
+        this.mensaje = 'Se cambio la contraseña correctamente.';
       },
-      error : (err : Http.Response) => this.mensaje = err.mensaje
+      error : (err) => this.gestionarError(err)
     });
   }
 
   public ingresarDinero(datos : Usuario.UsuarioDinero) {
     this.service.putDinero(datos).subscribe({
       next : (val : Usuario.UsuarioDatos) => {
-        this.usuario = val;
         this.mensaje = 'Se cambio actualizo el dinero.'
+        this.error = false;
+        this.usuario = val;
       },
-      error : (err : Http.Response) => this.mensaje = err.mensaje
+      error : (err) => this.gestionarError(err)
     });
   }
 
@@ -132,7 +134,12 @@ export class UsuarioPage implements OnInit {
     data.append('imagen', imagen);
 
     this.service.putFoto(data).subscribe({
-      next : (val : Usuario.UsuarioFoto) => this.usuarioFoto = val
+      next : (val : Usuario.UsuarioFoto) => {
+        this.usuarioFoto = val;
+        this.error = false;
+        this.mensaje = 'Se actualizo la foto de perfil.';
+      },
+      error : (err) => this.gestionarError(err)
     })
   }
 
@@ -140,9 +147,16 @@ export class UsuarioPage implements OnInit {
     this.service.deleteUsuario().subscribe({
       next : () => {
         this.sesion.removeToken();
+        this.error = false;
         this.router.navigate(['/login']);
       },
-      error : (err : Http.Response) => this.mensaje = err.mensaje
+      error : (err) => this.gestionarError(err)
     });
+  }
+
+  private gestionarError(err : any) {
+    const errores = err.error;
+    this.mensaje = errores.mensaje;
+    this.error = true;
   }
 }

@@ -9,11 +9,11 @@ import { RouterModule } from '@angular/router';
   //templateUrl: './botton-pagina.component.html',
   template: `<div>
     @if (!paginaActual) {
-      <a (click)="cambiarPagina(pagina)">
+      <a (click)="cambiarPagina(pagina)" id="pagina-boton" class="btn btn-3">
         {{pagina}}
       </a>
     } @else {
-      <p>
+      <p id="pagina-actual" class="btn btn-3">
         {{pagina}}
       </p>
     }

@@ -22,8 +22,10 @@ interface SearchQueries {
   styleUrl: './engine.component.css'
 })
 export class EngineComponent implements OnInit {
-
   @Output() buscar = new EventEmitter<any>();
+  public categorias !: Categoria[];
+  public formatos : string[] = ['DVD', 'BLURAY', 'UHD'];
+  private data?: Http.SearchQueries;
 
   public searchForm : FormGroup = this.formBuilder.group({
     nombre : [''],
@@ -34,20 +36,16 @@ export class EngineComponent implements OnInit {
     ordenTiempo : ['false']
   });
 
-  public categorias ?: Categoria[];
-
-  public formatos : string[] = ['DVD', 'BLURAY', 'UHD'];
-
-  private data?: Http.SearchQueries;
-
-  constructor(private formBuilder : FormBuilder, 
-    private route : ActivatedRoute,
-    private cService : CategoriaService) {}
+  constructor(private formBuilder : FormBuilder, private route : ActivatedRoute, private cService : CategoriaService) {}
 
   ngOnInit(): void {
     this.cService.getCategorias().subscribe((res : Categoria[]) => {
       this.categorias = res;
+      this.cargarParametros();
     });
+  }
+
+  private cargarParametros() : void {
     this.route.queryParamMap.subscribe((query) => {
       this.searchForm.patchValue({
         nombre : query.get('nombre') || '',
@@ -60,7 +58,7 @@ export class EngineComponent implements OnInit {
     });
   }
 
-  enviarParametros() {
+  public enviarParametros() : void {
     this.data = {
       ...this.data,
       nombre : this.nombre?.value,
@@ -70,7 +68,7 @@ export class EngineComponent implements OnInit {
     this.buscar.emit(this.data);
   } 
 
-  cambiarFormato() {
+  public cambiarFormato() : void {
     if (this.formato?.value != 'TODOS') {
       this.data = {
         ...this.data,
@@ -82,7 +80,7 @@ export class EngineComponent implements OnInit {
     }
   }
 
-  cambiarCategoria() {
+  public cambiarCategoria() {
     if (this.categoria?.value != "0") {
       this.data = {
         ...this.data,

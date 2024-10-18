@@ -7,10 +7,23 @@ import { BotonPaginaComponent } from '../../../../compartido/componentes/botton-
   imports: [BotonPaginaComponent],
   //templateUrl: './pelicula-cantidad.component.html',
   template: `<div>
+    <div class="full-content flow-section flex-center">
+      <div class="section__header">
+        <h1>
+        @if (busqueda) {
+          Se han encontrado {{cantidad}} resultado{{(cantidad > 1)? 's' : ''}}.
+        } @else {
+          Se esta realizando la busqueda.
+        }
+        </h1>
+      </div>
+    </div>
     @if (busqueda && cantidad >= 1) {
-      @for (p of obtenerLista(); track $index) {
-        <boton-pagina [pagina]="p" [paginaActual]="(paginaActual == p)"/>
-      }
+      <div class="full-content flow-section flex-center">
+        @for (p of obtenerLista(); track $index) {
+          <boton-pagina [pagina]="p" [paginaActual]="(paginaActual == p)"/>
+        }
+      </div>
     }
   </div>`,
   styleUrl: './pelicula-cantidad.component.css'

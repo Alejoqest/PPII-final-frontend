@@ -1,11 +1,22 @@
 #wrapper {
-    height: 30%;
     margin-top: 2.5rem;
     margin-bottom: 2.5rem;
-    background-color: var(--color-m-vh);
+    /*background-color: var(--color-m-vh);*/
     border-radius: 1rem;
     box-sizing: border-box;
+    background-image: linear-gradient(var(--color-m-vh), var(--color-m-h));
+    padding: 1.5rem;
 }
 #body {
     color: var(--color-m-vs);
+    text-align: center;
+    margin: 0;
+}
+#content > p {
+    margin: 0;
+    line-height: 3rem;
+    color: var(--color-m-vs);
+}
+#btn {
+    padding: 2rem;
 }

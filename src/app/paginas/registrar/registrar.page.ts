@@ -1,24 +1,20 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../core/servicios/auth/auth.service';
 import { Usuario } from '../../core/modelos/usuario.model';
-import { Http } from '../../core/modelos/http.model';
 import { StorageService } from '../../core/servicios/storage/storage.service';
 import { Router, RouterModule } from '@angular/router';
 import { FormularioRegistroComponent } from './componentes/formulario-registro/formulario-registro.component';
 import { BusEventoService } from '../../core/servicios/busEvento/bus-evento.service';
+import { MensajeComponent } from '../../core/componentes/mensaje/mensaje.component';
 
 @Component({
   selector: 'app-registrar',
   standalone: true,
-  imports: [RouterModule, FormularioRegistroComponent],
+  imports: [RouterModule, MensajeComponent, FormularioRegistroComponent],
   //templateUrl: './registrar.page.html',
   template:`
   <div class="section">
-    @if (mensaje != '') {
-      <div class="section__header">
-        <h2>Error = {{mensaje}}</h2>
-      </div> 
-    }
+    <app-mensaje [mensaje]="mensaje" [hayError]="error"/>
     <div class="full-content flow-section flex-center">
       <formulario-registro (enviarInfo)="registrarse($event)"/>
     </div>
@@ -28,6 +24,8 @@ import { BusEventoService } from '../../core/servicios/busEvento/bus-evento.serv
 })
 export class RegistrarPage {
   public mensaje : string = '';
+  public error : boolean = false;
+  public enviando = false;
 
   constructor(private service : AuthService, private storage : StorageService, 
     private bus : BusEventoService, private router : Router) {}
@@ -39,8 +37,10 @@ export class RegistrarPage {
         this.bus.publicar({name : 'sesion', data : ''})
         this.router.navigate(['/cuenta']);
       },
-      error : (err : Http.Response) => {
-        this.mensaje = err.mensaje
+      error : (err) => {
+        const errores = err.error;
+        this.mensaje = errores.mensaje;
+        this.error = true;
       }
     });
   }

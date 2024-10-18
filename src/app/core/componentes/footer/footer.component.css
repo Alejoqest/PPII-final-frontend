@@ -1,0 +1,19 @@
+#footer {
+    box-sizing: border-box;
+    border: .25rem solid var(--color-m-vh);
+    margin: 0 auto;
+}
+#nav-top {
+    padding: 1rem;
+    background-color: var(--color-m-vh);
+}
+#top-ref {
+    text-decoration: none;
+    color: var(--color-m-s);
+}
+#top-ref:hover {
+    color: var(--color-m-vs);
+}
+#top-ref:active {
+    color: var(--color-w);
+}

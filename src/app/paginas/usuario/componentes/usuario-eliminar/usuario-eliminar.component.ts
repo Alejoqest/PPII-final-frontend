@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { GeneralService } from '../../../../compartido/servicios/general/general.service';
 import { DialogComponent } from '../../../../compartido/componentes/dialog/dialog.component';
 
-const DATA = {
+const DATA_DELETE = {
   encabezado : '¿Desea eliminar su cuenta?',
   cuerpo : 'No podra desahacer esta accion.'
 }
@@ -13,11 +13,13 @@ const DATA = {
   imports: [DialogComponent],
   //templateUrl: './usuario-eliminar.component.html',
   template: `<div>
-    @if (general.visible) {
-      <app-dialog [encabezado]="dialog.encabezado" [texto]="dialog.cuerpo" (eventoConfirmacion)="confimarEliminacion()"/>
-    }
+    <app-dialog id="dialog-borrar-cuenta" (eventoConfirmacion)="confimarEliminacion()">
+      <h1 ngProjectAs="dialog-header">¿Desea eliminar su cuenta?</h1>
+      <p ngProjectAs="dialog-body">No podra desahacer esta accion. Sus datos se van perden para siempre</p>
+      <button ngProjectAs="dialog-accept" class="btn btn-1" (click)="confimarEliminacion()">Eliminar</button>
+    </app-dialog>
     <div class="section__header">
-      <h2>Eliminar cuenta</h2>
+      <h1>Eliminar cuenta</h1>
     </div>
     <button (click)="mostrar()" class="btn btn-2">Eliminar Cuenta</button>
   </div>`,
@@ -29,15 +31,15 @@ export class UsuarioEliminarComponent {
   constructor(public general : GeneralService) {}
 
   public mostrar() {
-    this.general.visible = true;
+    this.general.abrir('dialog-borrar-cuenta');
   }
 
   public confimarEliminacion() {
-    this.general.visible = false;
     this.usuarioEliminar.emit();
   }
 
   get dialog() {
-    return DATA;
+    //console.log(DATA_DELETE);
+    return DATA_DELETE;
   }
 }

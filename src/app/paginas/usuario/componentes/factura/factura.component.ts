@@ -9,10 +9,10 @@ import { NgClass } from '@angular/common';
   standalone: true,
   imports: [FacturaDetallesComponent, NgClass],
   //templateUrl: './factura.component.html',
-  template: `<div class="full-content background backgorund-2">
-    <div class="full-content flow-section flex-space-between">
+  template: `<div class="full-content background background-4">
+    <div class="full-content flow-section flex-space-between align-center">
       <div>
-        Cantidad de Elementos: {{factura.cantidadDeElementos}}
+        Cantidad de Elementos: {{factura.cantidadDeDetalles}}
       </div>
       <div>
         Fecha: {{factura.fechaFactura}}
@@ -29,8 +29,8 @@ import { NgClass } from '@angular/common';
       </div>
     </div>
     @if (detalles) {
-      <div class="full-content" [ngClass]="{'invisible' : !detallesVista, 'detalles-list' : detallesCargados}">
-        <factura-detalles [detalles]="detalles" class="full-content"/>
+      <div class="full-content top-margin-m" [ngClass]="{'invisible' : !detallesVista, 'detalles-list' : detallesCargados}">
+        <factura-detalles [detalles]="detalles"/>
       </div>
     }
   </div>`,

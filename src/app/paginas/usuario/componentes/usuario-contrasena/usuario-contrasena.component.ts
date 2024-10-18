@@ -14,19 +14,19 @@ import { Usuario } from '../../../../core/modelos/usuario.model';
       </h1>
     </div>
     <form [formGroup]="campos" (ngSubmit)="enviarContrasena()">
-      <div class="full-content flow-section flex-space-bewteen">
-        <div class="form__el">
-          <label for="viejaContrasena">Ingrese la vieja contraseña: </label>
-          <input type="password" id="viejaContrasena" formControlName="viejaContrasena" class="i-form body-block">
-        </div>
-        <div class="form__el">
-          <label for="viejaContrasenaRep">Repita la vieja contraseña: </label>
-          <input type="password" id="viejaContrasenaRep" formControlName="viejaContrasenaRep" class="i-form body-block">
-        </div>
-      </div>
       <div class="form__el">
-        <label for="nuevaContrasena">La nueva contraseña: </label>
-        <input type="password" id="nuevaContrasena" formControlName="nuevaContrasena" class="i-form body-block full-content">
+        <label for="viejaContrasena">Ingrese la vieja contraseña: </label>
+        <input type="password" id="viejaContrasena" formControlName="viejaContrasena" class="i-form body-block full-content" placeholder="Vieja Contraseña">
+      </div>
+      <div class="full-content flow-section flex-space-between">
+        <div class="form__el">
+          <label for="nuevaContrasena">La nueva contraseña: </label>
+          <input type="password" id="nuevaContrasena" formControlName="nuevaContrasena" class="i-form body-block" placerholder="Nueva Contraseña">
+        </div>
+        <div class="form__el">
+          <label for="ContrasenaRep">Repita la contraseña: </label>
+          <input type="password" id="ContrasenaRep" formControlName="ContrasenaRep" class="i-form body-block" placerholder="Repetir Contraseña">
+        </div>
       </div>
       <div class="form__el">
         <input type="submit" value="Cambiar Contraseña" class="btn btn-1" [disabled]="campos.invalid">
@@ -42,7 +42,7 @@ export class UsuarioContrasenaComponent {
 
   public campos : FormGroup = this.builder.group({
     viejaContrasena : ['', Validators.required],
-    viejaContrasenaRep : ['', Validators.required],
+    ContrasenaRep : ['', Validators.required],
     nuevaContrasena : ['', Validators.required]
   });
 
@@ -51,7 +51,7 @@ export class UsuarioContrasenaComponent {
   constructor(private builder : FormBuilder) {}
 
   public enviarContrasena() : void {
-    if (this.viejaContrasena?.value != this.viejaContrasenaRep?.value) {
+    if (this.nuevaContrasena?.value != this.ContrasenaRep?.value) {
       this.mensaje = 'Las contrasena ingresada no es la misma.'
       return;
     }
@@ -69,8 +69,8 @@ export class UsuarioContrasenaComponent {
     return this.campos.get('viejaContrasena');
   }
 
-  get viejaContrasenaRep() : AbstractControl<string, string> | null {
-    return this.campos.get('viejaContrasenaRep');
+  get ContrasenaRep() : AbstractControl<string, string> | null {
+    return this.campos.get('ContrasenaRep');
   }
 
   get nuevaContrasena() : AbstractControl<string, string> | null {

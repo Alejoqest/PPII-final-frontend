@@ -4,7 +4,7 @@ import { Usuario } from '../../../../core/modelos/usuario.model';
 import { GeneralService } from '../../../../compartido/servicios/general/general.service';
 import { DialogComponent } from '../../../../compartido/componentes/dialog/dialog.component';
 
-const DATA = {
+const DATA_EDIT = {
   encabezado : '¿Desea realizar el cambio?',
   cuerpo : 'Esta accion no se va a poder desahacer. Todos los datos anteriores va a ser sobreescribidos.',
 }
@@ -15,13 +15,15 @@ const DATA = {
   imports: [ReactiveFormsModule, DialogComponent],
   //templateUrl: './usuario-datos.component.html',
   template: `<div>
-    @if (general.visible) {
-      <app-dialog [encabezado]="data.encabezado" [texto]="data.cuerpo" (eventoConfirmacion)="enviarEdicion()"/>
-    }
+    <!--<app-dialog id="dialog-actulizar-cuenta" (eventoConfirmacion)="enviarEdicion()">
+      <h1 ngProjectAs="dialog-header">¿Desea realizar el cambio?</h1>
+      <p ngProjectAs="dialog-body">Esta accion no se va a poder desahacer. Todos los datos anteriores va a ser sobreescribidos.</p>
+      <button ngProjectAs="dialog-accept" class="btn btn-1" (click)="enviarEdicion()">Editar</button>
+    </app-dialog>  -->
     <div class="section__header">
       <h1>Informacion de usuario:</h1>
     </div>
-    <form [formGroup]="campos" (ngSubmit)="mostrar()">
+    <form [formGroup]="campos" (ngSubmit)="enviarEdicion()">
       <div class="full-content flow-section flex-space-between">
         <div class="form__el">
           <label for="nombre">Nombre: </label>
@@ -71,11 +73,11 @@ export class UsuarioDatosComponent implements OnInit {
   }
 
   public mostrar() : void {
-    this.general.visible = true;
+    this.general.abrir('dialog-actualizar-cuenta');
   }
 
   public enviarEdicion() : void {
-    this.general.visible = false;
+    this.general.cerrar('dialog-actualizar-cuenta')
     const datos : Usuario.UsuarioDatos = {
       id : this.usuario.id,
       nombre : this.nombre?.value,
@@ -119,7 +121,7 @@ export class UsuarioDatosComponent implements OnInit {
     return this.campos.get('telefono');
   }
   
-  get data() : any {
-    return DATA;
+  get DATA_EDIT() : any {
+    return DATA_EDIT;
   }
 }
